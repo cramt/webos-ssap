@@ -1,0 +1,26 @@
+[package]
+name = "webos-ssap"
+version = "0.1.0"
+edition = "2024"
+description = "Client for the LG webOS TV SSAP API, plus a `tv` CLI"
+
+[[bin]]
+name = "tv"
+path = "src/main.rs"
+required-features = ["cli"]
+
+[features]
+default = ["cli"]
+cli = ["dep:clap", "dep:anyhow"]
+
+[dependencies]
+anyhow = { version = "1.0.104", optional = true }
+clap = { version = "4.6.7", features = ["derive", "env"], optional = true }
+futures-util = { version = "0.3.34", default-features = false, features = ["sink", "std"] }
+rustls = { version = "0.23.45", default-features = false, features = ["ring", "std", "tls12"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.11.0"
+thiserror = "2.0.21"
+tokio = { version = "1.53.1", features = ["rt-multi-thread", "macros", "net", "time"] }
+tokio-tungstenite = { version = "0.30.0", features = ["rustls-tls-native-roots"] }
